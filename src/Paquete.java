@@ -46,4 +46,9 @@ public class Paquete implements Comparable<Paquete>{
         //aca ordenamos de mayor a menor por peso
         return Double.compare(otro.getPesoKg(), this.getPesoKg());
     }
+
+    @Override
+    public String toString() {
+        return "Paquete [" + codigo + "] - Peso: " + pesoKg + " kg | Alimentos: " + (contieneAlimentos ? "Sí" : "No") + " | Urgencia: " + nivelUrgencia;
+    }
 }

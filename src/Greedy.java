@@ -55,6 +55,6 @@ public class Greedy {
             }
         }
 
-        return new Solucion(distribucion, pesoTotalNoAsignado, candidatosConsiderados);
+        return new Solucion(distribucion, pesoTotalNoAsignado, candidatosConsiderados,"candidatos considerados");
     }
 }

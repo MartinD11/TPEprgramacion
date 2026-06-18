@@ -16,7 +16,6 @@ public class Camion {
     public boolean estaRefrigerado() { return refrigerado; }
     public double getCapacidadKg() { return capacidadKg; }
 
-    // Necesarios para poder usar Camion como Key en el HashMap de la Solución
     @Override
     public int hashCode() { return Integer.hashCode(id); }
 

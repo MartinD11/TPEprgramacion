@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Servicio {
 
-    // Colecciones para almacenar los datos en memoria
+    //preguntar si seria viable agregar hahsmaps para cargar durante la lectura de los datos y hacer o(1) la complejidad de los metodos
+    //getPaqueteByCodigo y getPaquetesConAlimentos
+
     private List<Camion> camiones;
     private List<Paquete> paquetes;
 
@@ -20,11 +22,9 @@ public class Servicio {
 
     private void cargarCamiones(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            // Leemos la primera línea (cantidad total de camiones) y avanzamos
             String linea = br.readLine();
 
             while ((linea = br.readLine()) != null) {
-                // Separamos por punto y coma según el formato: <id>;<patente>;<refrigerado>;<capacidad>
                 String[] datos = linea.split(",");
 
                 if (datos.length >= 4) {
@@ -37,17 +37,15 @@ public class Servicio {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error al leer el archivo de camiones: " + e.getMessage());
+            System.err.println("error leyendo los archivos: " + e.getMessage());
         }
     }
 
     private void cargarPaquetes(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            // Leemos la primera línea (cantidad total de paquetes) y avanzamos
             String linea = br.readLine();
 
             while ((linea = br.readLine()) != null) {
-                // Separamos por punto y coma según el formato: <id>;<codigo>;<peso>;<alimentos>;<urgencia>
                 String[] datos = linea.split(",");
 
                 if (datos.length >= 5) {
@@ -61,12 +59,12 @@ public class Servicio {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error al leer el archivo de paquetes: " + e.getMessage());
+            System.err.println("error leyendo los paquetess: " + e.getMessage());
         }
     }
 
-    /*Servicio 3: Dados dos valores enteros que representan un nivel de urgencia mínimo y máximo,
-     retornar todos los paquetes cuyo nivel de urgencia se encuentre dentro de ese rango (inclusive).*/
+    /*Servicio 3: complejidad O(n) ya que en el peor de los casos, el paquete puede estar a lo ultimo o simplemenet ser null,
+    * asi que recorreremos n elementos hasta encontrar el paquete indicado*/
     public Paquete getPaqueteByCodigo(String codigo){
         for (Paquete paquete : paquetes) {
             if(paquete.getCodigo().equals(codigo)){
@@ -76,8 +74,7 @@ public class Servicio {
         return null;
     }
 
-    /*Servicio 2: Dado un booleano que indica si se buscan paquetes que contienen alimentos (true)
-     o que no contienen alimentos (false), retornar el listado de paquetes correspondiente.*/
+    /*Servicio 2: complejidad O(n) ya que debemos recorrer N elementos hasta el final*/
     public List<Paquete> getPaquetesConAlimentos(boolean contieneAlimentos){
         List<Paquete> paquetesConAlimentos = new ArrayList<>();
         for (Paquete paquete : paquetes) {
@@ -88,8 +85,8 @@ public class Servicio {
         return paquetesConAlimentos;
     }
 
-    /*Servicio 3: Dados dos valores enteros que representan un nivel de urgencia mínimo y máximo,
-     retornar todos los paquetes cuyo nivel de urgencia se encuentre dentro de ese rango (inclusive).*/
+    /*Servicio 3: la complejidad es O(n) ya que vamos a recorrer  N paquetes hasta el final
+    * para poder saber si cumplen con la condicion*/
     public List<Paquete> getPaquetesByRangoUrgencia(int min,int max){
         List<Paquete> paquetesByRangoUrgencia = new ArrayList<>();
         for (Paquete paquete : paquetes) {

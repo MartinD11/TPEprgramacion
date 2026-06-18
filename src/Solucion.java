@@ -5,26 +5,38 @@ public class Solucion {
     private Map<Camion, List<Paquete>> distribucion;
     private double pesoNoAsignado;
     private int metricaCosto;
+    private String nombreMetrica; // Agregamos esto
 
-    public Solucion(Map<Camion, List<Paquete>> distribucion, double pesoNoAsignado, int metricaCosto) {
+    public Solucion(Map<Camion, List<Paquete>> distribucion, double pesoNoAsignado, int metricaCosto, String nombreMetrica) {
         this.distribucion = distribucion;
         this.pesoNoAsignado = pesoNoAsignado;
         this.metricaCosto = metricaCosto;
+        this.nombreMetrica = nombreMetrica;
     }
 
-    public void imprimirReporte(String nombreAlgoritmo) {
-        System.out.println("--- " + nombreAlgoritmo + " ---");
-        System.out.println("Solución obtenida:");
+    public String obtenerReporte(String titulo) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("--- ").append(titulo).append(" ---\n");
+        sb.append("Solución obtenida:\n");
+
         for (Map.Entry<Camion, List<Paquete>> entry : distribucion.entrySet()) {
             Camion c = entry.getKey();
-            System.out.print("Camión " + c.getPatente() + ": [");
-            for (Paquete p : entry.getValue()) {
-                System.out.print(p.getCodigo() + " ");
+            sb.append("Camión ").append(c.getPatente()).append(": [");
+
+            for (int i = 0; i < entry.getValue().size(); i++) {
+                sb.append(entry.getValue().get(i).getCodigo());
+                if (i < entry.getValue().size() - 1) {
+                    sb.append(", ");
+                }
             }
-            System.out.println("]");
+            sb.append("]\n");
         }
-        System.out.println("Peso no asignado: " + pesoNoAsignado + " kg.");
-        System.out.println("Métrica de costo (" + (nombreAlgoritmo.equals("Backtracking") ? "estados generados" : "candidatos considerados") + "): " + metricaCosto);
-        System.out.println();
+
+        sb.append("Peso no asignado: ").append(pesoNoAsignado).append(" kg.\n");
+
+        sb.append("Métrica de costo (").append(nombreMetrica).append("): ").append(metricaCosto).append("\n");
+
+        return sb.toString();
     }
 }

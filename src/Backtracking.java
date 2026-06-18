@@ -34,11 +34,10 @@ public class Backtracking {
 
         buscarSolucion(camiones, paquetes, 0, distribucionActual, pesoOcupado, 0.0);
 
-        return new Solucion(mejorDistribucion, mejorPesoNoAsignado, estadosGenerados);
+        return new Solucion(mejorDistribucion, mejorPesoNoAsignado, estadosGenerados,"estados generados");
     }
 
-    private void buscarSolucion(List<Camion> camiones, List<Paquete> paquetes, int indice,
-                                Map<Camion, List<Paquete>> distribucionActual,
+    private void buscarSolucion(List<Camion> camiones, List<Paquete> paquetes, int indice, Map<Camion, List<Paquete>> distribucionActual,
                                 Map<Camion, Double> pesoOcupado, double pesoNoAsignadoActual) {
         estadosGenerados++;
 
