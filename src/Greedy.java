@@ -6,7 +6,7 @@ public class Greedy {
       Estrategia Greedy:
         nuestra estrategia greedy consiste en primero priorizar los paquetes que tienen alimentos ya que estos necesitan estar refrigerados
         y corremos el riesgo de no poder asignarlos(estos son prioritarios).
-        por otra parte si vemos que ambos son alimentos o NO lo son, desempatamos por peso y ubicamos el que tiene mayor peso primero, asi logramos
+        si ambos paquetes son alimentos  o tambien si no lo son, desempatamos por peso y ubicamos el que tiene mayor peso primero, asi logramos
         meter la mayor cantidad de paquetes posibles en cada camion.
         luego de ordenar lo que vamos a hacer es agarrar el primer paquete y recorrer los camiones para ver en cual lo podemos asignar, siempre teniendo en cuenta
         el espacio disponible.
@@ -24,15 +24,13 @@ public class Greedy {
             pesoOcupado.put(c, 0.0);
         }
 
-        // 1. Ordenamos la lista de paquetes con nuestra heurística
         List<Paquete> paquetesCandidatos = new ArrayList<>(paquetesTotales);
         Collections.sort(paquetesCandidatos);
 
-        // 2. Intentamos ubicar cada paquete
         for (Paquete p : paquetesCandidatos) {
             candidatosConsiderados++;
             boolean asignado = false;
-            int i = 0; // Índice para recorrer los camiones
+            int i = 0;
 
             // iteramos mientras haya camiones en la lista Y el paquete aún no haya sido asignado
             while (i < camiones.size() && !asignado) {

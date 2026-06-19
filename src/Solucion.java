@@ -5,7 +5,7 @@ public class Solucion {
     private Map<Camion, List<Paquete>> distribucion;
     private double pesoNoAsignado;
     private int metricaCosto;
-    private String nombreMetrica; // Agregamos esto
+    private String nombreMetrica;
 
     public Solucion(Map<Camion, List<Paquete>> distribucion, double pesoNoAsignado, int metricaCosto, String nombreMetrica) {
         this.distribucion = distribucion;

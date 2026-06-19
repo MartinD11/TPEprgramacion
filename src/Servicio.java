@@ -63,7 +63,7 @@ public class Servicio {
         }
     }
 
-    /*Servicio 3: complejidad O(n) ya que en el peor de los casos, el paquete puede estar a lo ultimo o simplemenet ser null,
+    /*Servicio 1: complejidad O(n) ya que en el peor de los casos, el paquete puede estar a lo ultimo o simplemenet ser null,
     * asi que recorreremos n elementos hasta encontrar el paquete indicado*/
     public Paquete getPaqueteByCodigo(String codigo){
         for (Paquete paquete : paquetes) {

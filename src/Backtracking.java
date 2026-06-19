@@ -10,13 +10,15 @@ public class Backtracking {
     private int estadosGenerados;
 
     /*
-     * Estrategia Backtracking:
-     * Exploramos el árbol de decisiones completo evaluando tres opciones para cada paquete:
+     * estrategia backtracking:
+     * exploramos el arbol de decisiones completo evaluando tres opciones para cada paquete:
      * asignarlo a un camión que cumpla las restricciones (capacidad y refrigeración), o dejarlo sin asignar.
-     * Poda: Llevamos el cálculo del "peso total no asignado acumulado". Si en una rama el peso de los paquetes
-     * que decidimos no asignar ya iguala o supera nuestro "mejorPesoNoAsignado" histórico, abortamos esa rama
-     * porque es imposible mejorar la solución actual.
+     * la poda consiste en  llevar  el cálculo del peso total no asignado acumulado. si en una rama el peso de los paquetes
+     * que decidimos no asignar ya iguala o supera nuestro mejorPesoNoAsignado histórico, cortamos esa rama
+     * porque es imposible mejorar la solución actual y no tiene sentido seguir explorando ramas.
+     *
      */
+
     public Solucion resolver(List<Camion> camiones, List<Paquete> paquetes) {
         this.mejorPesoNoAsignado = Double.MAX_VALUE;
         this.mejorDistribucion = new HashMap<>();
