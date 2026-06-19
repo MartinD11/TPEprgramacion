@@ -75,13 +75,12 @@ public class Servicio {
         }
     }
 
-    /*Servicio 1: complejidad O(n) ya que en el peor de los casos, el paquete puede estar a lo ultimo o simplemenet ser null,
-    * asi que recorreremos n elementos hasta encontrar el paquete indicado*/
+    /*Servicio 1: complejidad O(1) ya que esta guardado en un hashmap en el cual se accede mediante el codigo*/
     public Paquete getPaqueteByCodigo(String codigo){
         return mapaPaquetesPorCodigo.get(codigo);
     }
 
-    /*Servicio 2: complejidad O(n) ya que debemos recorrer N elementos hasta el final*/
+    /*Servicio 2: complejidad O(1)ya que tenemos cargada la lista desde que leemos los datos del csv*/
     public List<Paquete> getPaquetesConAlimentos(boolean contieneAlimentos){
         return mapaPaquetesPorAlimento.get(contieneAlimentos);
     }
