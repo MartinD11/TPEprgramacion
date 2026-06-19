@@ -34,21 +34,15 @@ public class Main {
         Greedy greedy = new Greedy();
         //PREGUNTAR SI ES NECESARIO SABER LOS SEGUNDOS QUE TARDAN LOS METODOS O CON LOS ESTADOS GENERADOS Y CANT DE CANDIDATOS ES SUFICIENTE.
         // Ejecución y medición de Backtracking
-        long inicioBack = System.currentTimeMillis();
         Solucion solucionBacktracking = backtracking.resolver(servicios.getCamiones(), servicios.getPaquetes());
-        long finBack = System.currentTimeMillis();
 
         System.out.println(solucionBacktracking.obtenerReporte("Backtracking"));
-        System.out.println("Tiempo de ejecución Backtracking: " + (finBack - inicioBack) + " ms");
         System.out.println("--------------------------------------------------\n");
 
         // Ejecución y medición de Greedy
-        long inicioGreedy = System.currentTimeMillis();
         Solucion solucionGreedy = greedy.resolver(servicios.getCamiones(), servicios.getPaquetes());
-        long finGreedy = System.currentTimeMillis();
 
         System.out.println(solucionGreedy.obtenerReporte("Greedy"));
-        System.out.println("Tiempo de ejecución Greedy: " + (finGreedy - inicioGreedy) + " ms");
         System.out.println("--------------------------------------------------\n");
     }
 }

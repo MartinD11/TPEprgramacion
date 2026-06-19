@@ -2,27 +2,33 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Servicio {
 
     //preguntar si seria viable agregar hahsmaps para cargar durante la lectura de los datos y hacer o(1) la complejidad de los metodos
     //getPaqueteByCodigo y getPaquetesConAlimentos
-
     private List<Camion> camiones;
     private List<Paquete> paquetes;
+    private Map<Boolean, List<Paquete>> mapaPaquetesPorAlimento;
+    private Map<String, Paquete> mapaPaquetesPorCodigo;
 
     public Servicio(String pathCamiones, String pathPaquetes) {
         this.camiones = new ArrayList<>();
         this.paquetes = new ArrayList<>();
-
+        this.mapaPaquetesPorCodigo = new HashMap<>();
+        this.mapaPaquetesPorAlimento = new HashMap<>();
+        this.mapaPaquetesPorAlimento.put(true, new ArrayList<>());
+        this.mapaPaquetesPorAlimento.put(false, new ArrayList<>());
         cargarCamiones(pathCamiones);
         cargarPaquetes(pathPaquetes);
     }
 
     private void cargarCamiones(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String linea = br.readLine();
+            String linea;
 
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
@@ -43,7 +49,7 @@ public class Servicio {
 
     private void cargarPaquetes(String path) {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String linea = br.readLine();
+            String linea;
 
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
@@ -55,7 +61,13 @@ public class Servicio {
                     boolean contieneAlimentos = datos[3].trim().equals("1");
                     int urgencia = Integer.parseInt(datos[4].trim());
 
-                    paquetes.add(new Paquete(id, codigo, peso, contieneAlimentos, urgencia));
+                    Paquete nuevoPaquete = new Paquete(id, codigo, peso, contieneAlimentos, urgencia);
+
+                    paquetes.add(nuevoPaquete);
+
+                    mapaPaquetesPorCodigo.put(codigo, nuevoPaquete);
+
+                    mapaPaquetesPorAlimento.get(contieneAlimentos).add(nuevoPaquete);
                 }
             }
         } catch (IOException e) {
@@ -66,23 +78,12 @@ public class Servicio {
     /*Servicio 1: complejidad O(n) ya que en el peor de los casos, el paquete puede estar a lo ultimo o simplemenet ser null,
     * asi que recorreremos n elementos hasta encontrar el paquete indicado*/
     public Paquete getPaqueteByCodigo(String codigo){
-        for (Paquete paquete : paquetes) {
-            if(paquete.getCodigo().equals(codigo)){
-                return paquete;
-            }
-        }
-        return null;
+        return mapaPaquetesPorCodigo.get(codigo);
     }
 
     /*Servicio 2: complejidad O(n) ya que debemos recorrer N elementos hasta el final*/
     public List<Paquete> getPaquetesConAlimentos(boolean contieneAlimentos){
-        List<Paquete> paquetesConAlimentos = new ArrayList<>();
-        for (Paquete paquete : paquetes) {
-            if(paquete.isContieneAlimentos()==contieneAlimentos){
-                paquetesConAlimentos.add(paquete);
-            }
-        }
-        return paquetesConAlimentos;
+        return mapaPaquetesPorAlimento.get(contieneAlimentos);
     }
 
     /*Servicio 3: la complejidad es O(n) ya que vamos a recorrer  N paquetes hasta el final
