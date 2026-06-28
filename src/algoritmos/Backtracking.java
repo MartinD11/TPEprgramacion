@@ -59,9 +59,11 @@ public class Backtracking {
             return;
         }
 
+        boolean esIgual = false;
         Paquete paqueteActual = paquetes.get(indice);
         //comenzamos el recorrido para poder asignar los paquetes a los camiones
-        for (Camion c : camiones) {
+        for (int i = 0; i < camiones.size() && !esIgual; i++) {
+            Camion c = camiones.get(i);
             boolean cumpleRefrigeracion = !paqueteActual.isContieneAlimentos() || c.estaRefrigerado();
             boolean cumpleCapacidad = (pesoOcupado.get(c) + paqueteActual.getPesoKg()) <= c.getCapacidadKg();
 
@@ -75,10 +77,19 @@ public class Backtracking {
 
                 distribucionActual.get(c).remove(distribucionActual.get(c).size() - 1);
                 pesoOcupado.put(c, pesoOcupado.get(c) - paqueteActual.getPesoKg());
+
+                //si el peso es perfecto, ponemos la bandera en true dandonos a entender que no tiene sentido seguir buscando en la rama si logramos un
+                //encaje perfecto(esto nos ahorra seguir preguntando por otros camiones)
+                if (pesoOcupado.get(c) + paqueteActual.getPesoKg() == c.getCapacidadKg()) {
+                    esIgual = true;
+                }
             }
         }
         //si no es posibel asignar un paquete, lo que hacemos es llamar nuevamente a la recursion
-        buscarSolucion(camiones, paquetes, indice + 1, distribucionActual, pesoOcupado, pesoNoAsignadoActual + paqueteActual.getPesoKg());
+        if(!esIgual) {
+            buscarSolucion(camiones, paquetes, indice + 1, distribucionActual, pesoOcupado, pesoNoAsignadoActual + paqueteActual.getPesoKg());
+        }
+
     }
 
     //hacemos una copia, ya  que si igualamos, estariamos igualando a lugar en memoria y no estariamos copiando el objeto de "verdad"
