@@ -1,3 +1,5 @@
+package algoritmos;
+
 public class Paquete implements Comparable<Paquete>{
     private int id;
     private String codigo;
@@ -49,6 +51,6 @@ public class Paquete implements Comparable<Paquete>{
 
     @Override
     public String toString() {
-        return "Paquete [" + codigo + "] - Peso: " + pesoKg + " kg | Alimentos: " + (contieneAlimentos ? "Sí" : "No") + " | Urgencia: " + nivelUrgencia;
+        return "algoritmos.Paquete [" + codigo + "] - Peso: " + pesoKg + " kg | Alimentos: " + (contieneAlimentos ? "Sí" : "No") + " | Urgencia: " + nivelUrgencia;
     }
 }

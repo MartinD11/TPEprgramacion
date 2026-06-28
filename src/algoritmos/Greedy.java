@@ -1,9 +1,11 @@
+package algoritmos;
+
 import java.util.*;
 
 public class Greedy {
 
     /*
-      Estrategia Greedy:
+      Estrategia algoritmos.Greedy:
         nuestra estrategia greedy consiste en primero priorizar los paquetes que tienen alimentos ya que estos necesitan estar refrigerados
         y corremos el riesgo de no poder asignarlos(estos son prioritarios).
         si ambos paquetes son alimentos  o tambien si no lo son, desempatamos por peso y ubicamos el que tiene mayor peso primero, asi logramos

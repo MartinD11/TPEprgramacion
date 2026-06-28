@@ -1,3 +1,5 @@
+package algoritmos;
+
 public class Camion {
     private int id;
     private String patente;
