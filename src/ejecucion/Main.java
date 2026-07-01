@@ -20,7 +20,7 @@ public class Main {
         if (p != null) {
             System.out.println(p);
         } else {
-            System.out.println("No se encontró ningún paquete con el código P010.");
+            System.out.println("No se encontró ningún paquete con el código");
         }
         System.out.println("--------------------------------------------------\n");
 

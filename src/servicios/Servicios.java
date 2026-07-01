@@ -94,6 +94,7 @@ public class Servicios {
         return mapaPaquetesPorAlimento.get(contieneAlimentos);
     }
 
+    //SERIA NECESARIO UTILIZAR UN ARBOL ROJO/NEGRO(LOG N + K) PARA MEJORAR LA EFICIENCIA O CON ESTA BUSQUEDA O(N) ESTA BIEN?
     /*Servicio 3: la complejidad es O(n) ya que vamos a recorrer  N paquetes hasta el final
     * para poder saber si cumplen con la condicion*/
     public List<Paquete> servicio3(int min,int max){

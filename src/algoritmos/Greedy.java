@@ -3,9 +3,9 @@ package algoritmos;
 import java.util.*;
 
 public class Greedy {
-
+    private static final String TIPO_GREEDY = "candidatos considerados";
     /*
-      Estrategia algoritmos.Greedy:
+      Estrategia Greedy:
         nuestra estrategia greedy consiste en primero priorizar los paquetes que tienen alimentos ya que estos necesitan estar refrigerados
         y corremos el riesgo de no poder asignarlos(estos son prioritarios).
         si ambos paquetes son alimentos  o tambien si no lo son, desempatamos por peso y ubicamos el que tiene mayor peso primero, asi logramos
@@ -13,6 +13,7 @@ public class Greedy {
         luego de ordenar lo que vamos a hacer es agarrar el primer paquete y recorrer los camiones para ver en cual lo podemos asignar, siempre teniendo en cuenta
         el espacio disponible.
         luego al final, en caso de no ser asignado, se sumara al peso de paquetes no asignados para poder devolver en la solucion final.
+
      */
     public Solucion resolver(List<Camion> camiones, List<Paquete> paquetesTotales) {
         int candidatosConsiderados = 0;
@@ -55,6 +56,6 @@ public class Greedy {
             }
         }
 
-        return new Solucion(distribucion, pesoTotalNoAsignado, candidatosConsiderados,"candidatos considerados");
+        return new Solucion(distribucion, pesoTotalNoAsignado, candidatosConsiderados,TIPO_GREEDY);
     }
 }
